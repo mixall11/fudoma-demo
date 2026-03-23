@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FUDOMA – Demo stránka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5ede0;
+  --cream-light: #faf4ec;
+  --brown-dark: #3d1f0f;
+  --brown-mid: #6b3a2a;
+  --brown-light: #8b5a3c;
+  --red: #c0392b;
+  --red-dark: #922b21;
+  --orange: #e07b10;
+  --orange-hover: #c96d0a;
+  --gold: #d4a017;
+  --white: #ffffff;
+  --gray-light: #f8f8f8;
+  --text-dark: #3d1f0f;
+  --text-mid: #5a3828;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Lato', sans-serif; color: var(--text-dark); background: var(--white); }
+
+/* ========= PLACEHOLDER IMAGE SYSTEM ========= */
+.ph {
+  background: linear-gradient(135deg, #d4b896 0%, #c4a882 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #7a5535;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  gap: 6px;
+}
+.ph::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px);
+}
+.ph span { position: relative; z-index: 1; opacity: 0.8; font-size: 11px; }
+.ph strong { position: relative; z-index: 1; font-size: 14px; }
+.ph-dark {
+  background: linear-gradient(135deg, #5a3a2a 0%, #3d2010 100%);
+  color: #c4a882;
+}
+.ph-kitchen {
+  background: linear-gradient(135deg, #2a1a0a 0%, #1a0d05 50%, #2d1810 100%);
+  color: #a0856a;
+}
+.ph-restaurant {
+  background: linear-gradient(135deg, #3a2a1a 0%, #5a3e28 100%);
+  color: #c4a882;
+}
+.ph-app {
+  background: linear-gradient(135deg, #f5ede0 0%, #e8d4be 100%);
+  color: #6b3a2a;
+  border: 2px solid #d4b896;
+}
+
+/* ========= NAVBAR ========= */
+nav {
+  background: var(--brown-dark);
+  padding: 0 40px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.nav-logo-circle {
+  width: 50px; height: 50px;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(192,57,43,0.15);
+}
+.nav-logo-circle svg { width: 28px; height: 28px; fill: var(--cream); }
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--orange); }
+.nav-social { display: flex; gap: 10px; align-items: center; }
+.nav-social a {
+  width: 34px; height: 34px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 13px; text-decoration: none;
+  transition: opacity 0.2s;
+}
+.nav-social a:hover { opacity: 0.8; }
+.fb { background: #1877f2; color: white; }
+.ig { background: #e1306c; color: white; }
+.yt { background: #ff0000; color: white; }
+
+/* ========= PAGES ========= */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ========= HERO ========= */
+.hero {
+  position: relative;
+  height: 600px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #1a0a02 0%, #2d1208 40%, #1a0a02 100%);
+}
+.hero-bg-img {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #2a1205 0%, #0d0603 50%, #1a0a05 100%);
+  opacity: 0.9;
+}
+.hero-bg-pattern {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 30px,
+    rgba(255,255,255,0.01) 30px, rgba(255,255,255,0.01) 60px
+  );
+}
+/* Simulated kitchen photo placeholder */
+.hero-photo {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(80,40,10,0.6) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(60,20,5,0.5) 0%, transparent 40%),
+    linear-gradient(to bottom, rgba(20,8,2,0.3) 0%, rgba(10,4,1,0.7) 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-photo-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #1a0905 0%, #2d1208 30%, #0d0603 60%, #1a0905 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(180,130,80,0.3);
+  font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 700;
+}
+.hero-photo-label {
+  position: absolute;
+  bottom: 16px; right: 16px;
+  background: rgba(0,0,0,0.5);
+  color: rgba(200,160,100,0.7);
+  font-size: 10px; padding: 4px 10px;
+  border-radius: 3px; letter-spacing: 1px;
+  text-transform: uppercase; border: 1px solid rgba(200,160,100,0.2);
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-icon { margin-bottom: 16px; }
+.hero-icon svg { width: 70px; height: 70px; fill: var(--cream); opacity: 0.9; }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px; font-weight: 700;
+  color: var(--white);
+  letter-spacing: 4px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  margin-bottom: 12px;
+}
+.hero p {
+  color: rgba(245,237,224,0.85);
+  font-size: 17px; font-style: italic;
+  margin-bottom: 32px;
+  letter-spacing: 0.5px;
+}
+.hero-btns { display: flex; gap: 16px; justify-content: center; }
+.btn-outline {
+  padding: 12px 28px;
+  border: 1px solid rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.9);
+  background: transparent;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s;
+  border-radius: 2px;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+.btn-orange {
+  padding: 12px 28px;
+  background: var(--orange);
+  color: white;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s;
+  border: none; border-radius: 2px;
+}
+.btn-orange:hover { background: var(--orange-hover); }
+
+/* ========= BENEFITS BAR ========= */
+.benefits-bar {
+  background: var(--cream);
+  padding: 48px 80px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+}
+.benefit {
+  text-align: center;
+  padding: 24px 40px;
+  border-right: 1px solid rgba(107,58,42,0.15);
+}
+.benefit:last-child { border-right: none; }
+.benefit-icon { font-size: 36px; margin-bottom: 14px; color: var(--brown-light); }
+.benefit h3 {
+  font-size: 13px; font-weight: 900;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--brown-dark); margin-bottom: 10px;
+}
+.benefit p { font-size: 14px; color: var(--brown-mid); line-height: 1.6; }
+
+/* ========= SECTIONS ========= */
+.section { padding: 80px 80px; }
+.section-cream { background: var(--cream-light); }
+.section-white { background: var(--white); }
+.section-brown { background: var(--brown-dark); color: var(--cream); }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; font-weight: 700;
+  text-align: center;
+  color: var(--brown-dark);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.section-subtitle {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 48px;
+  color: var(--brown-mid);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* ========= CO JE FUDOMA ========= */
+.what-fudoma {
+  text-align: center;
+  padding: 80px 120px;
+  background: var(--cream-light);
+}
+.app-screenshot {
+  width: 620px;
+  margin: 40px auto 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(61,31,15,0.25);
+  border: 12px solid #1a1a1a;
+  background: #1a1a1a;
+}
+.app-inner {
+  background: var(--white);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.app-header {
+  background: var(--red);
+  padding: 10px 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.app-select {
+  background: rgba(255,255,255,0.2);
+  border: none; color: white;
+  padding: 6px 12px; border-radius: 3px;
+  font-size: 13px; font-weight: 700;
+}
+.app-header-ph { width: 120px; height: 24px; background: rgba(255,255,255,0.25); border-radius: 3px; }
+.app-tabs {
+  display: flex; gap: 24px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+.app-tab { font-size: 13px; color: var(--brown-mid); cursor: pointer; }
+.app-tab.active { color: var(--red); font-weight: 700; border-bottom: 2px solid var(--red); padding-bottom: 4px; }
+.app-row {
+  display: flex; align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.app-row-name { flex: 1; font-size: 13px; color: var(--text-dark); }
+.app-row-count { display: flex; align-items: center; gap: 6px; }
+.app-counter { display: flex; align-items: center; gap: 4px; }
+.app-counter span { font-size: 13px; color: var(--brown-mid); }
+.app-add { background: #27ae60; color: white; border: none; width: 22px; height: 22px; border-radius: 3px; font-size: 14px; cursor: pointer; }
+.app-price { font-size: 13px; color: var(--brown-mid); margin: 0 16px; }
+.app-day { font-weight: 700; font-size: 14px; padding: 10px 16px; background: #fafafa; color: var(--text-dark); }
+
+/* ========= HOW IT WORKS ========= */
+.how-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+}
+.how-card {
+  border: 1px solid rgba(107,58,42,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 20px rgba(61,31,15,0.08);
+}
+.how-card-header {
+  background: var(--cream);
+  padding: 20px 16px 16px;
+  min-height: 160px;
+  display: flex; flex-direction: column;
+}
+.mock-search {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #666;
+  background: white;
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 8px;
+}
+.mock-title { font-size: 12px; font-weight: 700; color: var(--brown-mid); margin-bottom: 6px; }
+.mock-item {
+  padding: 5px 8px;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--text-dark);
+}
+.mock-heart { color: var(--brown-light); font-size: 12px; }
+.how-card-body { padding: 20px; }
+.how-num { color: var(--orange); font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.how-card h3 { font-size: 16px; font-weight: 900; color: var(--brown-dark); margin-bottom: 10px; }
+.how-card p { font-size: 13px; color: var(--brown-mid); line-height: 1.7; }
+
+/* ========= FEATURES GRID ========= */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 48px;
+}
+.feature-card {
+  background: var(--cream);
+  padding: 28px 32px;
+  display: flex; align-items: flex-start; gap: 20px;
+  border-radius: 4px;
+}
+.feature-icon {
+  width: 50px; height: 50px;
+  border: 2px solid rgba(107,58,42,0.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px; color: var(--brown-mid);
+}
+.feature-card h3 { font-size: 14px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; color: var(--brown-dark); margin-bottom: 8px; }
+.feature-card p { font-size: 13px; color: var(--brown-mid); line-height: 1.6; }
+
+/* ========= DEMO CTA STRIP ========= */
+.cta-strip {
+  background: var(--white);
+  padding: 40px 80px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--cream);
+  border-bottom: 1px solid var(--cream);
+}
+.cta-strip h2 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--brown-dark); }
+.cta-strip h2 strong { color: var(--orange); }
+
+/* ========= BLOG ARTICLES ========= */
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 28px;
+  margin-top: 48px;
+}
+.blog-card {
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 20px rgba(61,31,15,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.blog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(61,31,15,0.15); }
+.blog-card-img { position: relative; }
+.blog-date {
+  position: absolute; top: 12px; left: 12px;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-size: 11px; font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+  color: var(--brown-dark);
+}
+.blog-card-body { padding: 20px; }
+.blog-card h3 { font-size: 16px; font-weight: 700; color: var(--brown-dark); margin-bottom: 10px; line-height: 1.4; }
+.blog-card p { font-size: 13px; color: var(--brown-mid); line-height: 1.6; margin-bottom: 16px; }
+
+/* ========= CLUB / PRICING ========= */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+  align-items: start;
+}
+.pricing-card {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+}
+.pricing-header-silver {
+  background: linear-gradient(135deg, #c0c0c0 0%, #a8a8a8 50%, #d4d4d4 100%);
+  padding: 32px 24px;
+  text-align: center;
+}
+.pricing-header-gold {
+  background: linear-gradient(135deg, #d4a017 0%, #b8860b 50%, #ffd700 100%);
+  padding: 40px 24px;
+  text-align: center;
+}
+.pricing-header-platinum {
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 50%, #3d3d3d 100%);
+  padding: 32px 24px;
+  text-align: center;
+}
+.pricing-logo {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px; font-weight: 700;
+}
+.pricing-logo-silver { background: linear-gradient(135deg, #e8e8e8, #b0b0b0); color: #555; border: 3px solid #aaa; }
+.pricing-logo-gold { background: linear-gradient(135deg, #ffe066, #b8860b); color: #5a3800; border: 3px solid #b8860b; }
+.pricing-logo-platinum { background: linear-gradient(135deg, #555, #222); color: #ccc; border: 3px solid #888; }
+.pricing-logo svg { width: 36px; height: 36px; }
+.pricing-name { font-size: 18px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+.silver-text { color: #444; }
+.gold-text { color: #5a3800; }
+.platinum-text { color: #e0e0e0; }
+.pricing-body-silver { background: #f0f0f0; padding: 24px; }
+.pricing-body-gold { background: #fdf0c8; padding: 24px; }
+.pricing-body-platinum { background: #1a1a1a; padding: 24px; }
+.pricing-base {
+  font-size: 13px; margin-bottom: 8px;
+  color: var(--brown-dark);
+  border-bottom: 1px solid rgba(107,58,42,0.2);
+  padding-bottom: 10px; margin-bottom: 14px;
+}
+.pricing-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-bottom: 10px; font-size: 13px;
+}
+.pricing-item.disabled { opacity: 0.4; }
+.check { color: #27ae60; font-weight: 900; flex-shrink: 0; }
+.pricing-item-dark { color: #ccc; }
+.pricing-footer {
+  padding: 20px 24px;
+  text-align: center;
+  font-size: 13px; font-weight: 700;
+}
+.pricing-footer-silver { background: #e0e0e0; color: var(--brown-dark); }
+.pricing-footer-gold { background: #e8c840; color: #5a3800; }
+.pricing-footer-platinum { background: #111; color: #ccc; }
+.pricing-note { text-align: center; margin-top: 24px; font-size: 13px; color: var(--brown-mid); }
+
+/* ========= FOOTER ========= */
+footer {
+  background: var(--brown-dark);
+  padding: 60px 80px 40px;
+  color: var(--cream);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 32px;
+}
+.footer-logo { width: 60px; height: 60px; border: 2px solid var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: rgba(192,57,43,0.15); }
+.footer-logo svg { width: 34px; height: 34px; fill: var(--cream); }
+.footer-col h4 { font-size: 13px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream); margin-bottom: 16px; }
+.footer-col a { display: block; color: rgba(245,237,224,0.65); font-size: 13px; text-decoration: none; margin-bottom: 8px; transition: color 0.2s; cursor: pointer; }
+.footer-col a:hover { color: var(--orange); }
+.footer-social { display: flex; gap: 10px; margin-top: 4px; }
+.footer-bottom { text-align: center; font-size: 12px; color: rgba(245,237,224,0.4); }
+
+/* ========= O NÁS PAGE ========= */
+.about-hero {
+  background: var(--cream-light);
+  padding: 80px 120px;
+  text-align: center;
+}
+.about-content {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--brown-mid);
+}
+.about-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 60px 120px;
+  background: var(--white);
+}
+.about-split p { font-size: 15px; line-height: 1.9; color: var(--brown-mid); text-align: center; margin-bottom: 24px; }
+.about-laptop { border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(61,31,15,0.2); border: 10px solid #1a1a1a; }
+
+/* ========= FAQ PAGE ========= */
+.faq-hero {
+  background: var(--cream-light);
+  padding: 60px 80px;
+  text-align: center;
+}
+.faq-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: 60px 80px;
+  align-items: start;
+}
+.faq-laptop { border-radius: 10px; overflow: hidden; box-shadow: 0 16px 50px rgba(61,31,15,0.2); border: 10px solid #1a1a1a; }
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+.faq-item {
+  border-bottom: 1px solid rgba(107,58,42,0.15);
+  padding: 18px 0;
+}
+.faq-q { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+.faq-q span { font-size: 15px; color: var(--brown-dark); font-weight: 400; }
+.faq-plus { color: var(--brown-light); font-size: 20px; }
+.faq-a { font-size: 13px; color: var(--brown-mid); line-height: 1.7; margin-top: 10px; display: none; }
+.faq-item.open .faq-a { display: block; }
+.faq-item.open .faq-plus { transform: rotate(45deg); }
+
+/* ========= DEMO PAGE ========= */
+.demo-page {
+  background: var(--cream-light);
+  min-height: 600px;
+  padding: 80px;
+  text-align: center;
+}
+.demo-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+  text-align: left;
+}
+.demo-feature {
+  background: white;
+  border-radius: 8px;
+  padding: 28px;
+  border: 1px solid rgba(107,58,42,0.1);
+  box-shadow: 0 4px 16px rgba(61,31,15,0.06);
+}
+.demo-feature-icon { font-size: 28px; margin-bottom: 14px; }
+.demo-feature h3 { font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: var(--brown-dark); margin-bottom: 8px; }
+.demo-feature p { font-size: 13px; color: var(--brown-mid); line-height: 1.6; }
+.demo-cta { margin-top: 56px; }
+.demo-cta p { font-size: 16px; color: var(--brown-mid); margin-bottom: 24px; }
+
+/* ========= BLOG PAGE ========= */
+.blog-page { padding: 60px 80px; background: var(--cream-light); }
+.blog-full-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 28px;
+  margin-top: 40px;
+}
+
+/* ========= BLOG POST PAGE ========= */
+.post-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 48px;
+  padding: 40px 80px 80px;
+  background: var(--cream-light);
+  align-items: start;
+}
+.post-main {}
+.breadcrumb { font-size: 12px; color: var(--brown-light); margin-bottom: 24px; }
+.breadcrumb span { color: var(--brown-dark); }
+.post-img { border-radius: 8px; overflow: hidden; margin-bottom: 32px; }
+.post-main h2 { font-size: 28px; font-weight: 700; color: var(--brown-dark); margin-bottom: 16px; }
+.post-main h3 { font-size: 16px; font-style: italic; color: var(--orange); margin-bottom: 24px; }
+.post-main p { font-size: 15px; line-height: 1.9; color: var(--brown-mid); margin-bottom: 20px; }
+.post-sidebar {
+  position: sticky;
+  top: 90px;
+}
+.sidebar-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(61,31,15,0.1);
+  margin-bottom: 24px;
+}
+.sidebar-card-header {
+  background: linear-gradient(135deg, #f0e8d8, #e8d0b8);
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(107,58,42,0.15);
+}
+.sidebar-card-body { padding: 20px; }
+.sidebar-card-body p { font-size: 13px; color: var(--brown-mid); line-height: 1.6; margin-bottom: 8px; }
+.sidebar-meta { font-size: 11px; color: var(--brown-light); margin-top: 12px; }
+
+/* ========= KONTAKT PAGE ========= */
+.kontakt-page { background: var(--cream-light); }
+.kontakt-info {
+  padding: 60px 80px 40px;
+  text-align: center;
+}
+.kontakt-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 800px;
+  margin: 40px auto 0;
+}
+.kontakt-card {
+  background: white;
+  border-radius: 6px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 16px rgba(61,31,15,0.08);
+}
+.kontakt-icon {
+  width: 48px; height: 48px;
+  background: rgba(224,123,16,0.12);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+.kontakt-card h4 { font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; color: var(--brown-dark); margin-bottom: 4px; }
+.kontakt-card p { font-size: 14px; color: var(--brown-mid); }
+.kontakt-form {
+  background: var(--brown-mid);
+  padding: 60px 80px;
+}
+.kontakt-form .section-title { color: var(--cream); }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 760px;
+  margin: 40px auto 0;
+}
+.form-full { grid-column: 1 / -1; }
+.form-group label { display: block; font-size: 13px; color: rgba(245,237,224,0.8); margin-bottom: 6px; }
+.form-group label span { color: var(--orange); }
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  background: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--text-dark);
+  outline: none;
+}
+.form-control:focus { box-shadow: 0 0 0 3px rgba(224,123,16,0.3); }
+textarea.form-control { height: 120px; resize: vertical; }
+.form-consent { font-size: 12px; color: rgba(245,237,224,0.65); display: flex; gap: 10px; align-items: flex-start; margin-top: 4px; }
+.form-consent input { margin-top: 3px; flex-shrink: 0; }
+.form-submit { text-align: center; margin-top: 28px; }
+
+/* ========= FUTURE SECTION ========= */
+.future-section {
+  background: var(--white);
+  padding: 80px;
+  text-align: center;
+}
+.future-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 32px;
+}
+.future-badge {
+  background: var(--cream);
+  border: 1px solid rgba(107,58,42,0.2);
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: var(--brown-mid);
+  font-weight: 700;
+  display: flex; align-items: center; gap: 6px;
+}
+.future-badge.soon { border-color: var(--orange); color: var(--orange); }
+
+/* ========= PLACEHOLDER WRAPPERS ========= */
+.ph-hero-img { width: 100%; height: 600px; }
+.ph-app-big { width: 600px; height: 360px; margin: 40px auto 0; }
+.ph-blog { width: 100%; height: 220px; }
+.ph-post-main { width: 100%; height: 400px; }
+.ph-about { width: 100%; height: 320px; }
+.ph-faq { width: 100%; height: 380px; }
+.ph-future { width: 100%; height: 260px; }
+
+/* ========= RESPONSIVE NAV ========= */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { gap: 16px; }
+  .benefits-bar { padding: 32px 20px; }
+  .section { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========= NAVIGATION ========= -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-circle">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C10.3 2 9 3.3 9 5v1H4v2h1l1 10h12l1-10h1V6h-5V5c0-1.7-1.3-3-3-3zm0 2c.6 0 1 .4 1 1v1h-2V5c0-.6.4-1 1-1zM7.1 8h9.8l-.9 8H8l-.9-8z"/>
+        <rect x="5" y="19" width="14" height="2" rx="1"/>
+      </svg>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">DOMOV</a></li>
+    <li><a onclick="showPage('onas')" id="nav-onas">O NÁS</a></li>
+    <li><a onclick="showPage('club')" id="nav-club">CLUB</a></li>
+    <li><a onclick="showPage('demo')" id="nav-demo">DEMO</a></li>
+    <li><a onclick="showPage('faq')" id="nav-faq">FAQ</a></li>
+    <li><a onclick="showPage('blog')" id="nav-blog">BLOG</a></li>
+    <li><a onclick="showPage('kontakt')" id="nav-kontakt">KONTAKT</a></li>
+  </ul>
+  <div class="nav-social">
+    <a class="fb" href="#">f</a>
+    <a class="ig" href="#">📷</a>
+    <a class="yt" href="#">▶</a>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- PAGE: HOME                                                    -->
+<!-- ============================================================ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-photo">
+      <div class="hero-photo-placeholder">FOTO KUCHYNE — 1920 × 600 px</div>
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,8,2,0.35) 0%,rgba(10,4,1,0.55) 100%);"></div>
+    <div class="hero-content">
+      <div class="hero-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C10.3 2 9 3.3 9 5v1H4v2h1l1 10h12l1-10h1V6h-5V5c0-1.7-1.3-3-3-3zm0 2c.6 0 1 .4 1 1v1h-2V5c0-.6.4-1 1-1zM7.1 8h9.8l-.9 8H8l-.9-8z"/>
+          <rect x="5" y="19" width="14" height="2" rx="1"/>
+        </svg>
+      </div>
+      <h1>FUDOMA</h1>
+      <p>"Effective time saving and cashflow control"</p>
+      <div class="hero-btns">
+        <button class="btn-outline" onclick="showPage('onas')">CHCEM VEDIEŤ VIAC</button>
+        <button class="btn-orange" onclick="showPage('demo')">MÁM ZÁUJEM</button>
+      </div>
+    </div>
+    <div class="hero-photo-label">PLACEHOLDER — foto profesionálna kuchyňa</div>
+  </div>
+
+  <!-- BENEFITS BAR -->
+  <div class="benefits-bar">
+    <div class="benefit">
+      <div class="benefit-icon">⏱</div>
+      <h3>Šetrí čas</h3>
+      <p>S pomocou technológií je možné automatizovať manuálne plánovanie.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">€</div>
+      <h3>Znižuje náklady</h3>
+      <p>Efektívne riadenie času a surovín pomáha znižovať náklady.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">🌿</div>
+      <h3>Neplytva surovinami</h3>
+      <p>Vďaka presnému výpočtu si môžete objednať toľko tovaru, koľko potrebujete.</p>
+    </div>
+  </div>
+
+  <!-- ČO JE FUDOMA -->
+  <div class="what-fudoma">
+    <h2 class="section-title">ČO JE FUDOMA</h2>
+    <p class="section-subtitle">Fudoma je webová aplikácia dostupná kedykoľvek v prehliadači bez nutnosti inštalácie, alebo integrácie do existujúcich systémov. Používa robustnú databázu receptov na plánovanie menu. Po zadaní počtu porcií presne vypočíta množstvo ingrediencií potrebných na ich prípravu a vytvorí nákupný zoznam.</p>
+    <div class="app-screenshot">
+      <div class="app-inner">
+        <div class="app-header">
+          <span class="app-select">Vaša prevádzka ▾</span>
+          <div class="app-header-ph"></div>
+          <div class="app-header-ph" style="width:80px;"></div>
+        </div>
+        <div class="app-tabs">
+          <span class="app-tab active">Denné menu</span>
+          <span class="app-tab">À la carte</span>
+          <span class="app-tab">Catering</span>
+        </div>
+        <div class="app-day">Pondelok</div>
+        <div class="app-row">
+          <span class="app-row-name">Hráškový krém s viedenskou cibuľou</span>
+          <div class="app-row-count">
+            <div class="app-counter"><span>− 30 +</span></div>
+          </div>
+          <span class="app-price">1,39 €</span>
+          <button class="app-add">+</button>
+        </div>
+        <div class="app-row">
+          <span class="app-row-name">Mexické burritos plnené mletým hovädzím mäsom</span>
+          <div class="app-counter"><span>− 50 +</span></div>
+          <span class="app-price">2,20 €</span>
+          <button class="app-add">+</button>
+        </div>
+        <div class="app-row">
+          <span class="app-row-name">Grilovaná panenka so slivkovou omáčkou</span>
+          <div class="app-counter"><span>− 75 +</span></div>
+          <span class="app-price">2,09 €</span>
+          <button class="app-add">+</button>
+        </div>
+        <div class="app-row">
+          <span class="app-row-name">Zeleninovo-kokosové karí so zázvorom</span>
+          <div class="app-counter"><span>− 25 +</span></div>
+          <span class="app-price">1,78 €</span>
+          <button class="app-add">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEMO CTA STRIP -->
+  <div class="cta-strip">
+    <h2>VYSKÚŠAJTE SI BEZPLATNÉ DEMO. <strong>FUDOMA</strong>.</h2>
+    <button class="btn-orange" onclick="showPage('demo')">BEZPLATNÁ DEMO VERZIA</button>
+  </div>
+
+  <!-- AKO FUNGUJE -->
+  <div class="section section-cream">
+    <h2 class="section-title">AKO FUDOMA FUNGUJE</h2>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-card-header">
+          <div class="mock-title">Receptúry</div>
+          <div class="mock-search">🔍 bravčové</div>
+          <div style="font-size:11px;color:#888;margin-bottom:6px;">Výsledok vyhľadávania (416)</div>
+          <div class="mock-item"><span class="mock-heart">♡</span> Bravčová panenka, Chrenová omáčka, americ...</div>
+          <div class="mock-item"><span class="mock-heart">♡</span> Bravčové karé na jablkách, tarhoňa</div>
+          <div class="mock-item"><span class="mock-heart">♡</span> Bravčové Soté v zemiakovej placke</div>
+        </div>
+        <div class="how-card-body">
+          <div class="how-num">1 – VYHĽADAJTE</div>
+          <h3>Vyberte z databázy receptúr</h3>
+          <p>Vyberte si z tisícok receptúr z rozsiahlej databázy, prispôsobte ich pre vlastné potreby alebo zaznamenajte si vlastné receptúry a postupy.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-card-header">
+          <div style="display:flex;gap:16px;margin-bottom:8px;">
+            <span style="font-size:12px;font-weight:700;color:#c0392b;border-bottom:2px solid #c0392b;padding-bottom:4px;">Denné menu</span>
+            <span style="font-size:12px;color:#888;">À la carte</span>
+            <span style="font-size:12px;color:#888;">Catering</span>
+          </div>
+          <div style="font-weight:700;font-size:12px;margin-bottom:6px;">Pondelok</div>
+          <div class="mock-item" style="background:#f5f5f5;border-radius:3px;padding:5px 8px;margin-bottom:4px;justify-content:space-between;">
+            <span>Bravčové Soté v placke</span><span style="color:#27ae60;font-weight:700;">− 80 +</span>
+          </div>
+          <div class="mock-item" style="background:#f5f5f5;border-radius:3px;padding:5px 8px;margin-bottom:4px;justify-content:space-between;">
+            <span>Polievka Cesnaková</span><span style="color:#27ae60;font-weight:700;">− 100 +</span>
+          </div>
+        </div>
+        <div class="how-card-body">
+          <div class="how-num">2 – NAPLÁNUJTE</div>
+          <h3>Vytvorte plán jedálneho lístka</h3>
+          <p>Pár kliknutiami zaraďte požadovanú receptúru do plánu pre denné menu, à la carte ponuku či catering a nastavte požadovaný počet porcií.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-card-header">
+          <div class="mock-title">Zoznam</div>
+          <div style="background:#f5f5f5;border-radius:3px;padding:7px 10px;margin-bottom:4px;font-size:12px;">Vajcia, 100 ks</div>
+          <div style="background:#f5f5f5;border-radius:3px;padding:7px 10px;margin-bottom:4px;font-size:12px;">Mlieko polotučné, 10 l</div>
+          <div style="background:#f5f5f5;border-radius:3px;padding:7px 10px;margin-bottom:4px;font-size:12px;">Maslo, 500 g</div>
+          <div style="background:#f5f5f5;border-radius:3px;padding:7px 10px;font-size:12px;">Bravčové pliecko, 20 kg</div>
+        </div>
+        <div class="how-card-body">
+          <div class="how-num">3 – OBJEDNAJTE</div>
+          <h3>Automatický nákupný zoznam</h3>
+          <p>Fudoma automaticky vypočíta potrebné množstvo všetkých surovín, ktoré je potrebné objednať. Zoznam je pripravený na odoslanie dodávateľom.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KĽÚČOVÉ FUNKCIE -->
+  <div class="section section-white">
+    <h2 class="section-title">KĽÚČOVÉ FUNKCIE</h2>
+    <p class="section-subtitle">Minimalizujte náklady spojené s plánovaním a manažmentom. Venujte svoju energiu tam, kde bude jej výsledkom vyššia kvalita a spokojnosť vašich zákazníkov a personálu.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">☰</div>
+        <div>
+          <h3>Zbiera a uchováva receptúry</h3>
+          <p>Využite databázu s viac ako 3 000 receptúrami z domácej a svetovej kuchyne.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <div>
+          <h3>Plánuje</h3>
+          <p>Vybrané receptúry jedným kliknutím pridáte alebo odstránite z plánovania.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <div>
+          <h3>Prispôsobuje sa</h3>
+          <p>Vytvorte jednoducho vlastnú receptúru alebo upravte pôvodné podľa vašich predstáv a noriem.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧮</div>
+        <div>
+          <h3>Počíta za vás</h3>
+          <p>Optimálne množstvo surovín potrebných k vytvoreniu vášho menu je vypočítané automaticky.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUDÚCE FUNKCIE -->
+  <div class="future-section">
+    <h2 class="section-title">PRIPRAVOVANÉ FUNKCIE</h2>
+    <p class="section-subtitle">Fudoma sa neustále vyvíja. Tu sú funkcie, na ktorých pracujeme a ktoré čoskoro pribudnú.</p>
+    <div class="future-badges">
+      <span class="future-badge">📊 Štatistiky predaja</span>
+      <span class="future-badge">📱 Mobilná aplikácia</span>
+      <span class="future-badge soon">🔜 Kalorické tabuľky</span>
+      <span class="future-badge soon">🔜 Integrácia s POS</span>
+      <span class="future-badge soon">🔜 AI odporúčania receptov</span>
+      <span class="future-badge">🌍 Viacjazyčné menu</span>
+      <span class="future-badge">🚚 Napojenie na dodávateľov</span>
+      <span class="future-badge soon">🔜 Alergény a diéty</span>
+      <span class="future-badge">📧 Email notifikácie</span>
+      <span class="future-badge soon">🔜 API pre external systémy</span>
+    </div>
+  </div>
+
+  <!-- ČLÁNKY PREVIEW -->
+  <div class="section section-cream">
+    <h2 class="section-title">ČLÁNKY</h2>
+    <div class="blog-grid">
+      <div class="blog-card" onclick="showPage('post1')">
+        <div class="blog-card-img">
+          <div class="ph ph-restaurant" style="height:220px;">
+            <strong>820 × 220 px</strong>
+            <span>foto — manažér v reštaurácii</span>
+          </div>
+          <div class="blog-date">02<br>marec</div>
+        </div>
+        <div class="blog-card-body">
+          <h3>Rutina manažéra a šéfkuchára – plánovanie pod stresom</h3>
+          <p>Každodenná prevádzka reštaurácie znamená pre manažéra aj šéfkuchára ranný zhon, stres z neočakávaných problémov a trvalý tlak na presné plánovanie,...</p>
+          <button class="btn-orange" style="font-size:12px;padding:8px 18px;">ČÍTAJ VIAC</button>
+        </div>
+      </div>
+      <div class="blog-card" onclick="showPage('post2')">
+        <div class="blog-card-img">
+          <div class="ph ph-kitchen" style="height:220px;">
+            <strong>820 × 220 px</strong>
+            <span>foto — život v gastronómii</span>
+          </div>
+          <div class="blog-date">02<br>marec</div>
+        </div>
+        <div class="blog-card-body">
+          <h3>Môj život v gastronómii – ako vznikla Fudoma</h3>
+          <p>Autor opisuje osobnú cestu od náročných začiatkov v kuchyniach cez prácu v reštauráciách a hoteloch až po sen riadiť reštauráciu...</p>
+          <button class="btn-orange" style="font-size:12px;padding:8px 18px;">ČÍTAJ VIAC</button>
+        </div>
+      </div>
+      <div class="blog-card" onclick="showPage('post3')">
+        <div class="blog-card-img">
+          <div class="ph ph-restaurant" style="height:220px;">
+            <strong>820 × 220 px</strong>
+            <span>foto — šéfkuchár pri práci</span>
+          </div>
+          <div class="blog-date">02<br>marec</div>
+        </div>
+        <div class="blog-card-body">
+          <h3>Pre koho je Fudoma určená a aké sú jej kľúčové funkcie</h3>
+          <p>Gastronómia je rýchla, dynamická a plná rozhodnutí, ktoré sa robia v pohybe. Každý deň prináša nové výzvy – od organizácie...</p>
+          <button class="btn-orange" style="font-size:12px;padding:8px 18px;">ČÍTAJ VIAC</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page-home -->
+
+<!-- ============================================================ -->
+<!-- PAGE: O NÁS                                                   -->
+<!-- ============================================================ -->
+<div id="page-onas" class="page">
+  <div class="about-hero">
+    <h1 class="section-title">KDO JE ZA PROJEKTOM FUDOMA?</h1>
+    <p class="section-subtitle">Za projektom FUDOMA stojí človek, ktorý prešiel celou cestou gastronómie – od prvých krokov v kuchyni až po vedenie reštaurácie – a dnes spolu so svojím tímom premieňa túto skúsenosť na systém, ktorý prináša poriadok do prevádzky, kontrolu a odstraňuje chaos, ktorý sám zažíval.</p>
+    <p class="section-subtitle" style="margin-top:-20px;">Prešli sme si ťažkou školou reality: dlhé smeny, nízke platy, nedokonalé podmienky – ale o to viac sme boli dychtivosť posúvať veci vpred. Každý problém v kuchyni sme zažili na vlastnej koži. Presne vieme, aké ťažké je každý deň zabezpečiť kvalitné jedlo, plánovať jedálne lístky, objednávať suroviny bez toho, aby ste stratili prehľad alebo chuť do práce.</p>
+  </div>
+  <div class="about-split">
+    <div>
+      <div class="ph ph-kitchen" style="height:320px;border-radius:10px;box-shadow:0 16px 50px rgba(61,31,15,0.2);">
+        <strong>760 × 320 px</strong>
+        <span>foto — šéfkuchár pri práci v kuchyni</span>
+      </div>
+    </div>
+    <div>
+      <p>Z tejto skúsenosti vznikla aplikácia Fudoma – nástroj na automatizáciu a zjednodušenie každodenných úloh v cateringových operáciách. Fudoma vám umožňuje jednoducho plánovať denné a týždenné jedálne lístky, viesť históriu predaja, spravovať databázu receptov a vytvárať nákupné zoznamy na základe známych jedál. Šetrí to čas, materiál a peniaze – a predovšetkým nervy.</p>
+      <button class="btn-orange" style="margin-top:8px;" onclick="showPage('demo')">BEZPLATNÁ DEMO VERZIA</button>
+    </div>
+  </div>
+  <div class="section section-cream" style="text-align:center;">
+    <h2 class="section-title">NAŠÍM CIEĽOM</h2>
+    <p class="section-subtitle">Pomôcť kuchárom, manažérom a majiteľom získať späť kontrolu nad prevádzkou, minimalizovať chaos a zefektívniť plánovanie. Vieme, aký náročný je každodenný život v gastronómii – a preto sme vytvorili riešenie, ktoré prináša skutočný rozdiel.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:40px;">
+      <div style="text-align:center;padding:32px;">
+        <div style="font-size:48px;color:var(--orange);font-family:'Playfair Display',serif;font-weight:700;">3 000+</div>
+        <div style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--brown-mid);margin-top:8px;">Receptúr v databáze</div>
+      </div>
+      <div style="text-align:center;padding:32px;">
+        <div style="font-size:48px;color:var(--orange);font-family:'Playfair Display',serif;font-weight:700;">500+</div>
+        <div style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--brown-mid);margin-top:8px;">Aktívnych prevádzok</div>
+      </div>
+      <div style="text-align:center;padding:32px;">
+        <div style="font-size:48px;color:var(--orange);font-family:'Playfair Display',serif;font-weight:700;">98%</div>
+        <div style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--brown-mid);margin-top:8px;">Spokojnosť zákazníkov</div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:0 80px 80px;">
+    <div class="ph ph-restaurant" style="height:260px;border-radius:8px;">
+      <strong>1200 × 260 px</strong>
+      <span>foto — tím Fudoma / záber na prevádzku</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: CLUB                                                    -->
+<!-- ============================================================ -->
+<div id="page-club" class="page">
+  <div class="section section-cream" style="text-align:center;">
+    <h1 class="section-title">PREDPLATNÉ</h1>
+    <p class="section-subtitle">Pridaj sa do klubu Fudoma a získaj prístup k nástrojom, ktoré ti uľahčia plánovanie a riadenie kuchyne. Vyber si členstvo, ktoré najlepšie vyhovuje tvojmu podnikaniu.</p>
+    <div class="pricing-grid">
+      <!-- SILVER -->
+      <div class="pricing-card">
+        <div class="pricing-header-silver">
+          <div class="pricing-logo pricing-logo-silver">
+            <svg viewBox="0 0 24 24" fill="#666"><path d="M12 2C10.3 2 9 3.3 9 5v1H4v2h1l1 10h12l1-10h1V6h-5V5c0-1.7-1.3-3-3-3zm0 2c.6 0 1 .4 1 1v1h-2V5c0-.6.4-1 1-1z"/></svg>
+          </div>
+          <div class="pricing-name silver-text">SILVER CLUB</div>
+        </div>
+        <div class="pricing-body-silver">
+          <div class="pricing-base">viac ako 3000 receptov</div>
+          <div class="pricing-item"><span class="check">✓</span> extra 50 receptov podľa vlastného výberu</div>
+          <div class="pricing-item"><span class="check">✓</span> vytvorenie nákupného zoznamu</div>
+          <div class="pricing-item"><span class="check">✓</span> vytvorenie jedálneho lístka</div>
+          <div class="pricing-item disabled"><span style="color:#ccc;">✓</span> šéfkuchár k dispozícii</div>
+          <div class="pricing-item disabled"><span style="color:#ccc;">✓</span> kalorický prepočet</div>
+          <div class="pricing-item disabled"><span style="color:#ccc;">✓</span> extra zľavy u partnerov</div>
+        </div>
+        <div class="pricing-footer pricing-footer-silver">Vybrať CLUB 2,50 € bez DPH / deň</div>
+      </div>
+      <!-- GOLD -->
+      <div class="pricing-card">
+        <div class="pricing-header-gold">
+          <div class="pricing-logo pricing-logo-gold">
+            <svg viewBox="0 0 24 24" fill="#5a3800"><path d="M12 2C10.3 2 9 3.3 9 5v1H4v2h1l1 10h12l1-10h1V6h-5V5c0-1.7-1.3-3-3-3zm0 2c.6 0 1 .4 1 1v1h-2V5c0-.6.4-1 1-1z"/></svg>
+          </div>
+          <div class="pricing-name gold-text">GOLD CLUB</div>
+        </div>
+        <div class="pricing-body-gold">
+          <div class="pricing-base">viac ako 3000 receptov</div>
+          <div class="pricing-item"><span class="check">✓</span> extra 100 receptov podľa vlastného výberu</div>
+          <div class="pricing-item"><span class="check">✓</span> vytvorenie nákupného zoznamu</div>
+          <div class="pricing-item"><span class="check">✓</span> vytvorenie jedálneho lístka</div>
+          <div class="pricing-item"><span class="check">✓</span> šéfkuchár k dispozícii</div>
+          <div class="pricing-item disabled"><span style="color:#ccc;">✓</span> kalorický prepočet</div>
+          <div class="pricing-item disabled"><span style="color:#ccc;">✓</span> extra zľavy u partnerov</div>
+        </div>
+        <div class="pricing-footer pricing-footer-gold">Vybrať CLUB 3,50 € bez DPH / deň</div>
+      </div>
+      <!-- PLATINUM -->
+      <div class="pricing-card">
+        <div class="pricing-header-platinum">
+          <div class="pricing-logo pricing-logo-platinum">
+            <svg viewBox="0 0 24 24" fill="#ccc"><path d="M12 2C10.3 2 9 3.3 9 5v1H4v2h1l1 10h12l1-10h1V6h-5V5c0-1.7-1.3-3-3-3zm0 2c.6 0 1 .4 1 1v1h-2V5c0-.6.4-1 1-1z"/></svg>
+          </div>
+          <div class="pricing-name platinum-text">PLATINUM CLUB</div>
+        </div>
+        <div class="pricing-body-platinum">
+          <div class="pricing-base" style="color:#aaa;border-color:rgba(255,255,255,0.1);">viac ako 3000 receptov</div>
+          <div class="pricing-item pricing-item-dark"><span class="check">✓</span> extra 150 receptov podľa vlastného výberu</div>
+          <div class="pricing-item pricing-item-dark"><span class="check">✓</span> vytvorenie nákupného zoznamu</div>
+          <div class="pricing-item pricing-item-dark"><span class="check">✓</span> vytvorenie jedálneho lístka</div>
+          <div class="pricing-item pricing-item-dark"><span class="check">✓</span> šéfkuchár k dispozícii</div>
+          <div class="pricing-item pricing-item-dark"><span class="check">✓</span> kalorický prepočet</div>
+          <div class="pricing-item pricing-item-dark"><span class="check">✓</span> extra zľavy u partnerov</div>
+        </div>
+        <div class="pricing-footer pricing-footer-platinum">Vybrať CLUB 4,50 € bez DPH / deň</div>
+      </div>
+    </div>
+    <p class="pricing-note">* Uvedené ceny sú bez DPH.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: DEMO                                                    -->
+<!-- ============================================================ -->
+<div id="page-demo" class="page">
+  <div class="demo-page">
+    <h1 class="section-title">DEMO VERZIA FUDOMA</h1>
+    <p class="section-subtitle">Vyskúšajte Fudoma zdarma. Bez registrácie, bez kreditnej karty. Presvedčte sa sami, ako jednoduché môže byť plánovanie v gastronómii.</p>
+    <div style="margin:40px 0;">
+      <div class="ph ph-app" style="height:400px;max-width:900px;margin:0 auto;border-radius:12px;font-size:16px;">
+        <strong style="font-size:18px;">SCREENSHOT DEMO APLIKÁCIE — 900 × 400 px</strong>
+        <span>ukážka rozhrania aplikácie Fudoma</span>
+        <span style="margin-top:8px;font-size:12px;opacity:0.6;">(denné menu / receptúry / zoznam objednávok)</span>
+      </div>
+    </div>
+    <div class="demo-features">
+      <div class="demo-feature">
+        <div class="demo-feature-icon">🔍</div>
+        <h3>Vyhľadávanie receptúr</h3>
+        <p>Prehľadajte databázu viac ako 3 000 receptúr. Filtrujte podľa kuchyne, ingrediencií alebo názvu jedla.</p>
+      </div>
+      <div class="demo-feature">
+        <div class="demo-feature-icon">📋</div>
+        <h3>Plánovanie menu</h3>
+        <p>Zostavte denné, týždenné alebo sezónne menu jednoducho drag & drop metódou. Nastavte počty porcií.</p>
+      </div>
+      <div class="demo-feature">
+        <div class="demo-feature-icon">🛒</div>
+        <h3>Nákupný zoznam</h3>
+        <p>Automaticky generovaný zoznam surovín na základe plánovaného menu. Pripraven na odoslanie dodávateľom.</p>
+      </div>
+      <div class="demo-feature">
+        <div class="demo-feature-icon">📊</div>
+        <h3>Prehľad nákladov</h3>
+        <p>Sledujte náklady na suroviny, cenu porcie a maržu pre každé jedlo v reálnom čase.</p>
+      </div>
+      <div class="demo-feature">
+        <div class="demo-feature-icon">⚙️</div>
+        <h3>Vlastné receptúry</h3>
+        <p>Pridajte si vlastné recepty, upravte existujúce podľa vašich noriem a štandardov prevádzky.</p>
+      </div>
+      <div class="demo-feature">
+        <div class="demo-feature-icon">👨‍🍳</div>
+        <h3>Šéfkuchár online</h3>
+        <p>V Gold a Platinum verzii máte k dispozícii šéfkuchára, ktorý vám pomôže s receptúrami a plánovaním.</p>
+      </div>
+    </div>
+    <div class="demo-cta">
+      <p>Pripravení začať? Zaregistrujte sa a získajte 14 dní zdarma.</p>
+      <button class="btn-orange" style="font-size:15px;padding:16px 40px;">SPUSTIŤ BEZPLATNÚ DEMO VERZIU</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: FAQ                                                     -->
+<!-- ============================================================ -->
+<div id="page-faq" class="page">
+  <div class="faq-hero">
+    <h1 class="section-title">FAQ – ČASTO KLADENÉ OTÁZKY K FUDOMA</h1>
+    <p class="section-subtitle">Máte otázky, ako Fudoma funguje, pre koho je určená alebo ako prebieha demo verzia? Nižšie nájdete odpovede na najčastejšie otázky, ktoré nám pokladajú šéfkuchári, manažéri prevádzok aj majitelia reštaurácií.</p>
+  </div>
+  <div class="faq-layout">
+    <div>
+      <div class="ph ph-app" style="height:380px;border-radius:10px;box-shadow:0 16px 50px rgba(61,31,15,0.15);">
+        <strong>580 × 380 px</strong>
+        <span>screenshot — aplikácia Fudoma v notebooku</span>
+      </div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q"><span>1. Čo je Fudoma?</span><span class="faq-plus">+</span></div>
+        <div class="faq-a">Fudoma je cloudová webová aplikácia pre gastronómiu, ktorá pomáha plánovať menu, spravovať receptúry a automaticky generovať nákupné zoznamy. Funguje priamo v prehliadači bez nutnosti inštalácie.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q"><span>2. Ako Fudoma funguje v praxi?</span><span class="faq-plus">+</span></div>
+        <div class="faq-a">Vyberiete receptúry z databázy, zaradíte ich do plánu menu a zadáte počet porcií. Fudoma automaticky vypočíta množstvo všetkých potrebných surovín a vytvorí nákupný zoznam pre dodávateľov.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q"><span>3. Pre aké gastro prevádzky je Fudoma vhodná?</span><span class="faq-plus">+</span></div>
+        <div class="faq-a">Fudoma je vhodná pre reštaurácie, bistrá, hotely, kaviarne, catering spoločnosti a školské jedálne. Škáluje sa podľa veľkosti prevádzky.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q"><span>4. Musím niečo nainštalovať alebo integrovať do existujúceho systému?</span><span class="faq-plus">+</span></div>
+        <div class="faq-a">Nie. Fudoma beží kompletne v prehliadači. Nepotrebujete inštaláciu ani integráciu s existujúcimi systémami. Stačí internetové pripojenie.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q"><span>5. Koľko receptov obsahuje Fudoma a môžem si pridať vlastné?</span><span class="faq-plus">+</span></div>
+        <div class="faq-a">Databáza obsahuje viac ako 3 000 receptúr. V každom predplatnom môžete pridávať vlastné receptúry – 50 v Silver, 100 v Gold, 150 v Platinum clube.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q"><span>6. Čo presne Fudoma automaticky počíta?</span><span class="faq-plus">+</span></div>
+        <div class="faq-a">Na základe plánovaného menu a zadaného počtu porcií Fudoma automaticky prepočíta množstvo každej suroviny, ktorú je potrebné nakúpiť. Zohľadňuje odpady a gramáže z receptúr.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q"><span>7. Môžem Fudoma vyskúšať zdarma?</span><span class="faq-plus">+</span></div>
+        <div class="faq-a">Áno! Ponúkame bezplatnú demo verziu, ktorú si môžete vyskúšať bez registrácie a bez kreditnej karty. Plná verzia je dostupná so 14-dňovou skúšobnou dobou.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q"><span>8. Ako prebieha platba za predplatné?</span><span class="faq-plus">+</span></div>
+        <div class="faq-a">Predplatné sa platí mesačne alebo ročne. Ceny sú uvedené bez DPH. Platba je možná kartou alebo bankovým prevodom.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: BLOG                                                    -->
+<!-- ============================================================ -->
+<div id="page-blog" class="page">
+  <div class="blog-page">
+    <h1 class="section-title">NAJNOVŠIE ČLÁNKY</h1>
+    <div class="blog-full-grid">
+      <div class="blog-card" onclick="showPage('post1')">
+        <div class="blog-card-img">
+          <div class="ph ph-restaurant" style="height:220px;"><strong>820 × 220 px</strong><span>foto — manažér / stres / plánovanie</span></div>
+          <div class="blog-date">02<br>marec</div>
+        </div>
+        <div class="blog-card-body">
+          <h3>Rutina manažéra a šéfkuchára – plánovanie pod stresom</h3>
+          <p>Každodenná prevádzka reštaurácie znamená pre manažéra aj šéfkuchára ranný zhon, stres z neočakávaných problémov...</p>
+          <button class="btn-orange" style="font-size:12px;padding:8px 18px;">ČÍTAJ VIAC</button>
+        </div>
+      </div>
+      <div class="blog-card" onclick="showPage('post2')">
+        <div class="blog-card-img">
+          <div class="ph ph-kitchen" style="height:220px;"><strong>820 × 220 px</strong><span>foto — kuchár / zákulisie kuchyne</span></div>
+          <div class="blog-date">02<br>marec</div>
+        </div>
+        <div class="blog-card-body">
+          <h3>Môj život v gastronómii – ako vznikla Fudoma</h3>
+          <p>Autor opisuje osobnú cestu od náročných začiatkov v kuchyniach cez prácu v reštauráciách a hoteloch...</p>
+          <button class="btn-orange" style="font-size:12px;padding:8px 18px;">ČÍTAJ VIAC</button>
+        </div>
+      </div>
+      <div class="blog-card" onclick="showPage('post3')">
+        <div class="blog-card-img">
+          <div class="ph ph-restaurant" style="height:220px;"><strong>820 × 220 px</strong><span>foto — šéfkuchárom pri práci</span></div>
+          <div class="blog-date">02<br>marec</div>
+        </div>
+        <div class="blog-card-body">
+          <h3>Pre koho je Fudoma určená a aké sú jej kľúčové funkcie</h3>
+          <p>Gastronómia je rýchla, dynamická a plná rozhodnutí, ktoré sa robia v pohybe...</p>
+          <button class="btn-orange" style="font-size:12px;padding:8px 18px;">ČÍTAJ VIAC</button>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-card-img">
+          <div class="ph ph-kitchen" style="height:220px;"><strong>820 × 220 px</strong><span>foto — budúci článok #4</span></div>
+          <div class="blog-date">15<br>apr</div>
+        </div>
+        <div class="blog-card-body">
+          <h3>Ako znížiť food waste v reštaurácii na minimum</h3>
+          <p>Plytvanie potravinami je jedným z najväčších problémov gastronómie. V tomto článku ukážeme, ako ho môžete systematicky znižovať...</p>
+          <button class="btn-orange" style="font-size:12px;padding:8px 18px;">ČÍTAJ VIAC</button>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-card-img">
+          <div class="ph ph-restaurant" style="height:220px;"><strong>820 × 220 px</strong><span>foto — budúci článok #5</span></div>
+          <div class="blog-date">01<br>máj</div>
+        </div>
+        <div class="blog-card-body">
+          <h3>5 chýb pri plánovaní jedálneho lístka, ktoré vás stoja peniaze</h3>
+          <p>Chybné plánovanie stojí reštaurácie tisíce eur ročne. Pozrite sa, akým chybám sa vyhnúť a ako ich napraviť pomocou správnych nástrojov...</p>
+          <button class="btn-orange" style="font-size:12px;padding:8px 18px;">ČÍTAJ VIAC</button>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-card-img">
+          <div class="ph ph-kitchen" style="height:220px;"><strong>820 × 220 px</strong><span>foto — budúci článok #6</span></div>
+          <div class="blog-date">15<br>máj</div>
+        </div>
+        <div class="blog-card-body">
+          <h3>Digitalizácia v gastronómii – kde začať?</h3>
+          <p>Moderné reštaurácie sú čím ďalej viac digitálne. Kde začať s digitalizáciou prevádzky a aké nástroje prinášajú najväčší prínos?...</p>
+          <button class="btn-orange" style="font-size:12px;padding:8px 18px;">ČÍTAJ VIAC</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: BLOG POST 1                                             -->
+<!-- ============================================================ -->
+<div id="page-post1" class="page">
+  <div style="background:var(--cream-light);padding:20px 80px 0;">
+    <div class="breadcrumb">Home / <span>blog</span> / <span>Rutina manažéra a šéfkuchára</span></div>
+  </div>
+  <div class="post-layout">
+    <div class="post-main">
+      <div class="post-img">
+        <div class="ph ph-restaurant" style="height:400px;">
+          <strong>980 × 400 px</strong>
+          <span>hlavný obrázok článku — manažér reštaurácie pri plánovaní</span>
+        </div>
+      </div>
+      <h2>Ranný zhon v reštaurácii</h2>
+      <h3>Každý deň začína rovnako — stresom a zoznamom vecí, ktoré treba stihnúť</h3>
+      <p>Demo text článku. Každodenná prevádzka reštaurácie znamená pre manažéra aj šéfkuchára ranný zhon, stres z neočakávaných problémov a trvalý tlak na presné plánovanie. Tento článok opisuje typickú pracovnú rutinu a ukazuje, kde najčastejšie vznikajú straty času a peňazí.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</p>
+      <h2>Kde sa stráca čas v kuchyni?</h2>
+      <p>Analýzy ukazujú, že manažéri reštaurácií strávia až 30% svojho pracovného času administratívou – plánovanie menu, objednávky surovín, kontrola zásob. Fudoma tento čas redukuje na minimum automatizáciou kľúčových procesov.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione sequi nesciunt.</p>
+    </div>
+    <div class="post-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          <div style="font-size:28px;color:var(--brown-mid);">⏱</div>
+          <div style="font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--brown-dark);margin-top:8px;">ŠETRÍ ČAS</div>
+          <div style="font-size:12px;color:var(--brown-mid);margin-top:4px;">S pomocou technológií je možné automatizovať manuálne plánovanie.</div>
+        </div>
+        <div class="sidebar-card-body">
+          <p style="font-weight:700;color:var(--brown-dark);">Šetrenie času je na nezaplatenie</p>
+          <p>Keď sa jeho nedostatok stane každodennou realitou, každá ušetrená minúta je priestor pre to, na čom skutočne záleží.</p>
+          <div style="color:var(--orange);font-size:13px;font-weight:700;margin-top:12px;cursor:pointer;">ČÍTAŤ VIAC »</div>
+          <div class="sidebar-meta">22. marca 2026 • Nekomentované</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: BLOG POST 2                                             -->
+<!-- ============================================================ -->
+<div id="page-post2" class="page">
+  <div style="background:var(--cream-light);padding:20px 80px 0;">
+    <div class="breadcrumb">Home / <span>naše začiatky</span> / <span>Môj život v gastronómii – ako vznikla Fudoma</span></div>
+  </div>
+  <div class="post-layout">
+    <div class="post-main">
+      <div class="post-img">
+        <div class="ph ph-kitchen" style="height:400px;">
+          <strong>980 × 400 px</strong>
+          <span>hlavný obrázok — šéfkuchár v kuchyni, záber zboku</span>
+        </div>
+      </div>
+      <h2>Začiatky v kuchyni</h2>
+      <h3>Čas: Najdrahšia ingrediencia, ktorú si v gastre za peniaze nekúpite.</h3>
+      <p>Demo text článku. Pracoval som ako kuchár v niekoľkých reštauráciách. Práca znamenala dlhé hodiny – dvanástky boli bežné. Krátky a dlhý týždeň mali svoje čaro, najmä ten krátky. Každodenná rutina patrila k práci, ale učenie sa novým veciam bolo motiváciou.</p>
+      <p>V gastro svete má takmer všetko svoju jasnú cenovku – suroviny, moderné vybavenie kuchyne či prenájom priestorov. Všetko čo nám uľahčuje proces, riešenie situácie. To, čo si však za peniaze nikdy nekúpime, je čas. Minúty, ktoré nám denne pretekajú pomedzi prstami pri neefektívnych procesoch a administratívnom chaose, sú nenávratne preč.</p>
+      <h2>Prečo vznikla Fudoma?</h2>
+      <p>Pracujeme, aby sme žili? Práca v gastre je pre mnohých srdcovou záležitosťou, no často nás pohltí tak, že sa mení na nekonečný boj. Boj s maržami, s nedostatkom personálu, s objednávkami. Fudoma vznikla ako odpoveď na tieto každodenné výzvy.</p>
+    </div>
+    <div class="post-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          <div style="font-size:28px;color:var(--brown-mid);">⏱</div>
+          <div style="font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--brown-dark);margin-top:8px;">ŠETRÍ ČAS</div>
+          <div style="font-size:12px;color:var(--brown-mid);margin-top:4px;">S pomocou technológií je možné automatizovať manuálne plánovanie.</div>
+        </div>
+        <div class="sidebar-card-body">
+          <p style="font-weight:700;color:var(--brown-dark);">Šetrenie času je na nezaplatenie</p>
+          <p>Každá ušetrená minúta je priestor pre to, na čom skutočne záleží – rodinu, oddych, prácu či seba samých.</p>
+          <div style="color:var(--orange);font-size:13px;font-weight:700;margin-top:12px;cursor:pointer;">ČÍTAŤ VIAC »</div>
+          <div class="sidebar-meta">22. marca 2026 • Nekomentované</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: BLOG POST 3                                             -->
+<!-- ============================================================ -->
+<div id="page-post3" class="page">
+  <div style="background:var(--cream-light);padding:20px 80px 0;">
+    <div class="breadcrumb">Home / <span>naše začiatky</span> / <span>Prečo Fudoma</span></div>
+  </div>
+  <div class="post-layout">
+    <div class="post-main">
+      <div class="post-img">
+        <div class="ph ph-restaurant" style="height:400px;">
+          <strong>980 × 400 px</strong>
+          <span>hlavný obrázok — kuchár + zavretá reštaurácia "DNES ZATVORENÉ"</span>
+        </div>
+      </div>
+      <h2>Prečo Fudoma?</h2>
+      <h3>Čas: Najdrahšia ingrediencia, ktorú si v gastre za peniaze nekúpite.</h3>
+      <p>Demo text článku. V gastro svete má takmer všetko svoju jasnú cenovku – suroviny, moderné vybavenie kuchyne či prenájom priestorov. Všetko čo nám uľahčuje proces, riešenie situácie. To, čo si však za peniaze nikdy nekúpime, je čas.</p>
+      <p>Auto používame preto, aby sme si skrátili cestu, zrýchlili presun a zjednodušili život. Robíme to preto, aby sme svoj čas využili efektívnejšie a urobili si deň pestrejším a znesiteľnejším. Prečo by sme teda v našich prevádzkach mali "kráčať pešo" a strácať sa v papieroch?</p>
+      <h2>Pre koho je Fudoma určená?</h2>
+      <p>Fudoma je určená pre každého, kto prevádzkuje gastro zariadenie – od malej kaviarne po sieť reštaurácií. Ak sa každý deň stretávate s plánovaním jedálneho lístka, objednávaním surovín a riadením kuchyne, Fudoma je pre vás.</p>
+    </div>
+    <div class="post-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          <div style="font-size:28px;color:var(--brown-mid);">⏱</div>
+          <div style="font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--brown-dark);margin-top:8px;">ŠETRÍ ČAS</div>
+          <div style="font-size:12px;color:var(--brown-mid);margin-top:4px;">S pomocou technológií je možné automatizovať manuálne plánovanie.</div>
+        </div>
+        <div class="sidebar-card-body">
+          <p style="font-weight:700;color:var(--brown-dark);">Šetrenie času je na nezaplatenie</p>
+          <p>Každá ušetrená minúta je priestor pre to, na čom skutočne záleží – rodinu, oddych, prácu či seba samých.</p>
+          <div style="color:var(--orange);font-size:13px;font-weight:700;margin-top:12px;cursor:pointer;">ČÍTAŤ VIAC »</div>
+          <div class="sidebar-meta">22. marca 2026 • Nekomentované</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: KONTAKT                                                 -->
+<!-- ============================================================ -->
+<div id="page-kontakt" class="page">
+  <div class="kontakt-info">
+    <h1 class="section-title">KONTAKTNÉ INFORMÁCIE</h1>
+    <div class="kontakt-cards">
+      <div class="kontakt-card">
+        <div class="kontakt-icon">✉</div>
+        <div>
+          <h4>EMAIL ADRESA</h4>
+          <p>info@fudoma.com</p>
+        </div>
+      </div>
+      <div class="kontakt-card">
+        <div class="kontakt-icon">📞</div>
+        <div>
+          <h4>TELEFÓN</h4>
+          <p>+421 948 762 105</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="kontakt-form">
+    <h2 class="section-title">KONTAKTNÝ FORMULÁR</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Krstné meno <span>*</span></label>
+        <input type="text" class="form-control" placeholder="">
+      </div>
+      <div class="form-group">
+        <label>Priezvisko <span>*</span></label>
+        <input type="text" class="form-control" placeholder="">
+      </div>
+      <div class="form-group form-full">
+        <label>IČO <span>*</span></label>
+        <input type="text" class="form-control" placeholder="">
+      </div>
+      <div class="form-group form-full">
+        <label>Email <span>*</span></label>
+        <input type="email" class="form-control" placeholder="">
+      </div>
+      <div class="form-group form-full">
+        <label>Vaša správa <span>*</span></label>
+        <textarea class="form-control"></textarea>
+      </div>
+      <div class="form-group form-full">
+        <label class="form-consent">
+          <input type="checkbox">
+          Súhlasím s tým, aby táto webová lokalita uchovávala moje poskytnuté informácie, aby mohla odpovedať na moju požiadavku.
+        </label>
+      </div>
+    </div>
+    <div class="form-submit">
+      <button class="btn-orange" style="font-size:14px;padding:14px 40px;">ODOSLAŤ SPRÁVU</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                        -->
+<!-- ============================================================ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C10.3 2 9 3.3 9 5v1H4v2h1l1 10h12l1-10h1V6h-5V5c0-1.7-1.3-3-3-3zm0 2c.6 0 1 .4 1 1v1h-2V5c0-.6.4-1 1-1zM7.1 8h9.8l-.9 8H8l-.9-8z"/>
+          <rect x="5" y="19" width="14" height="2" rx="1"/>
+        </svg>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navigácia</h4>
+      <a onclick="showPage('home')">HOME</a>
+      <a onclick="showPage('onas')">O NÁS</a>
+      <a onclick="showPage('blog')">BLOG</a>
+      <a onclick="showPage('kontakt')">KONTAKT</a>
+    </div>
+    <div class="footer-col">
+      <h4>Služby</h4>
+      <a onclick="showPage('faq')">FAQ</a>
+      <a onclick="showPage('club')">CLUB</a>
+      <a onclick="showPage('demo')">DEMO</a>
+    </div>
+    <div class="footer-col">
+      <h4>Sledujte nás</h4>
+      <div class="footer-social">
+        <a class="fb" href="#">f</a>
+        <a class="ig" href="#">📷</a>
+        <a class="yt" href="#">▶</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Fudoma s.r.o. — Demo stránka. Všetky práva vyhradené.</div>
+</footer>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const page = document.getElementById('page-' + id);
+  if (page) {
+    page.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+  const navMap = {
+    home: 'nav-home', onas: 'nav-onas', club: 'nav-club',
+    demo: 'nav-demo', faq: 'nav-faq', blog: 'nav-blog',
+    kontakt: 'nav-kontakt',
+    post1: 'nav-blog', post2: 'nav-blog', post3: 'nav-blog'
+  };
+  const navEl = document.getElementById(navMap[id]);
+  if (navEl) navEl.classList.add('active');
+}
+
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
