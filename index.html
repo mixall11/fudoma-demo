@@ -438,32 +438,33 @@ nav {
   box-shadow: 0 8px 40px rgba(0,0,0,0.15);
 }
 .pricing-header-silver {
-  background: linear-gradient(135deg, #c0c0c0 0%, #a8a8a8 50%, #d4d4d4 100%);
+  background: linear-gradient(160deg, #d8d8d8 0%, #a0a0a0 50%, #c8c8c8 100%);
   padding: 32px 24px;
   text-align: center;
 }
 .pricing-header-gold {
-  background: linear-gradient(135deg, #d4a017 0%, #b8860b 50%, #ffd700 100%);
+  background: linear-gradient(160deg, #dba820 0%, #b8860b 50%, #e8c030 100%);
   padding: 40px 24px;
   text-align: center;
 }
 .pricing-header-platinum {
-  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 50%, #3d3d3d 100%);
+  background: linear-gradient(160deg, #333 0%, #1a1a1a 50%, #2a2a2a 100%);
   padding: 32px 24px;
   text-align: center;
 }
 .pricing-logo {
-  width: 80px; height: 80px;
+  width: 88px; height: 88px;
   border-radius: 50%;
   margin: 0 auto 16px;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 14px; font-weight: 700;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.18), 0 0 0 3px rgba(255,255,255,0.25);
 }
-.pricing-logo-silver { background: linear-gradient(135deg, #e8e8e8, #b0b0b0); color: #555; border: 3px solid #aaa; }
-.pricing-logo-gold { background: linear-gradient(135deg, #ffe066, #b8860b); color: #5a3800; border: 3px solid #b8860b; }
-.pricing-logo-platinum { background: linear-gradient(135deg, #555, #222); color: #ccc; border: 3px solid #888; }
-.pricing-logo svg { width: 36px; height: 36px; }
+.pricing-logo-silver { background: rgba(255,255,255,0.55); box-shadow: 0 4px 18px rgba(0,0,0,0.12), 0 0 0 3px rgba(255,255,255,0.7); }
+.pricing-logo-gold { background: rgba(255,255,255,0.22); box-shadow: 0 4px 18px rgba(0,0,0,0.18), 0 0 0 3px rgba(255,255,255,0.35); }
+.pricing-logo-platinum { background: rgba(255,255,255,0.10); box-shadow: 0 4px 18px rgba(0,0,0,0.3), 0 0 0 3px rgba(255,255,255,0.15); }
+.pricing-logo svg { width: 68px; height: 68px; }
 .pricing-name { font-size: 18px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
 .silver-text { color: #444; }
 .gold-text { color: #5a3800; }
@@ -1095,9 +1096,14 @@ textarea.form-control { height: 120px; resize: vertical; }
       <!-- SILVER -->
       <div class="pricing-card">
         <div class="pricing-header-silver">
-          <div class="pricing-logo pricing-logo-silver">
-            <svg viewBox="0 0 24 24" fill="#666"><path d="M12 2C10.3 2 9 3.3 9 5v1H4v2h1l1 10h12l1-10h1V6h-5V5c0-1.7-1.3-3-3-3zm0 2c.6 0 1 .4 1 1v1h-2V5c0-.6.4-1 1-1z"/></svg>
-          </div>
+          <div class="pricing-logo pricing-logo-silver"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="46" fill="none" stroke="#cc1111" stroke-width="6"/>
+  <circle cx="50" cy="28" r="5" fill="none" stroke="#cc1111" stroke-width="4"/>
+  <line x1="50" y1="33" x2="50" y2="38" stroke="#cc1111" stroke-width="4"/>
+  <path d="M20 62 Q20 38 50 38 Q80 38 80 62 Z" fill="#cc1111"/>
+  <rect x="16" y="63" width="68" height="5" rx="2" fill="#cc1111"/>
+  <rect x="20" y="70" width="60" height="5" rx="2" fill="#cc1111"/>
+</svg></div>
           <div class="pricing-name silver-text">SILVER CLUB</div>
         </div>
         <div class="pricing-body-silver">
@@ -1114,9 +1120,14 @@ textarea.form-control { height: 120px; resize: vertical; }
       <!-- GOLD -->
       <div class="pricing-card">
         <div class="pricing-header-gold">
-          <div class="pricing-logo pricing-logo-gold">
-            <svg viewBox="0 0 24 24" fill="#5a3800"><path d="M12 2C10.3 2 9 3.3 9 5v1H4v2h1l1 10h12l1-10h1V6h-5V5c0-1.7-1.3-3-3-3zm0 2c.6 0 1 .4 1 1v1h-2V5c0-.6.4-1 1-1z"/></svg>
-          </div>
+          <div class="pricing-logo pricing-logo-gold"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="46" fill="none" stroke="white" stroke-width="6"/>
+  <circle cx="50" cy="28" r="5" fill="none" stroke="white" stroke-width="4"/>
+  <line x1="50" y1="33" x2="50" y2="38" stroke="white" stroke-width="4"/>
+  <path d="M20 62 Q20 38 50 38 Q80 38 80 62 Z" fill="white"/>
+  <rect x="16" y="63" width="68" height="5" rx="2" fill="white"/>
+  <rect x="20" y="70" width="60" height="5" rx="2" fill="white"/>
+</svg></div>
           <div class="pricing-name gold-text">GOLD CLUB</div>
         </div>
         <div class="pricing-body-gold">
@@ -1133,9 +1144,14 @@ textarea.form-control { height: 120px; resize: vertical; }
       <!-- PLATINUM -->
       <div class="pricing-card">
         <div class="pricing-header-platinum">
-          <div class="pricing-logo pricing-logo-platinum">
-            <svg viewBox="0 0 24 24" fill="#ccc"><path d="M12 2C10.3 2 9 3.3 9 5v1H4v2h1l1 10h12l1-10h1V6h-5V5c0-1.7-1.3-3-3-3zm0 2c.6 0 1 .4 1 1v1h-2V5c0-.6.4-1 1-1z"/></svg>
-          </div>
+          <div class="pricing-logo pricing-logo-platinum"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="46" fill="none" stroke="white" stroke-width="6"/>
+  <circle cx="50" cy="28" r="5" fill="none" stroke="white" stroke-width="4"/>
+  <line x1="50" y1="33" x2="50" y2="38" stroke="white" stroke-width="4"/>
+  <path d="M20 62 Q20 38 50 38 Q80 38 80 62 Z" fill="white"/>
+  <rect x="16" y="63" width="68" height="5" rx="2" fill="white"/>
+  <rect x="20" y="70" width="60" height="5" rx="2" fill="white"/>
+</svg></div>
           <div class="pricing-name platinum-text">PLATINUM CLUB</div>
         </div>
         <div class="pricing-body-platinum">
