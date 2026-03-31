@@ -453,18 +453,15 @@ nav {
   text-align: center;
 }
 .pricing-logo {
-  width: 88px; height: 88px;
-  border-radius: 50%;
+  width: 96px; height: 96px;
   margin: 0 auto 16px;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(4px);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.18), 0 0 0 3px rgba(255,255,255,0.25);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
 }
-.pricing-logo-silver { background: rgba(255,255,255,0.55); box-shadow: 0 4px 18px rgba(0,0,0,0.12), 0 0 0 3px rgba(255,255,255,0.7); }
-.pricing-logo-gold { background: rgba(255,255,255,0.22); box-shadow: 0 4px 18px rgba(0,0,0,0.18), 0 0 0 3px rgba(255,255,255,0.35); }
-.pricing-logo-platinum { background: rgba(255,255,255,0.10); box-shadow: 0 4px 18px rgba(0,0,0,0.3), 0 0 0 3px rgba(255,255,255,0.15); }
-.pricing-logo svg { width: 68px; height: 68px; }
+.pricing-logo-silver {}
+.pricing-logo-gold {}
+.pricing-logo-platinum {}
+.pricing-logo svg { width: 96px; height: 96px; }
 .pricing-name { font-size: 18px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
 .silver-text { color: #444; }
 .gold-text { color: #5a3800; }
@@ -1096,13 +1093,13 @@ textarea.form-control { height: 120px; resize: vertical; }
       <!-- SILVER -->
       <div class="pricing-card">
         <div class="pricing-header-silver">
-          <div class="pricing-logo pricing-logo-silver"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="46" fill="none" stroke="#cc1111" stroke-width="6"/>
-  <circle cx="50" cy="28" r="5" fill="none" stroke="#cc1111" stroke-width="4"/>
-  <line x1="50" y1="33" x2="50" y2="38" stroke="#cc1111" stroke-width="4"/>
-  <path d="M20 62 Q20 38 50 38 Q80 38 80 62 Z" fill="#cc1111"/>
-  <rect x="16" y="63" width="68" height="5" rx="2" fill="#cc1111"/>
-  <rect x="20" y="70" width="60" height="5" rx="2" fill="#cc1111"/>
+          <div class="pricing-logo pricing-logo-silver"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="92" fill="white" stroke="#D00000" stroke-width="9"/>
+  <circle cx="100" cy="44" r="8" fill="none" stroke="#D00000" stroke-width="6"/>
+  <path d="M100 52 C65 52 35 72 30 105 L170 105 C165 72 135 52 100 52 Z" fill="#D00000"/>
+  <rect x="26" y="110" width="148" height="9" rx="4" fill="#D00000"/>
+  <rect x="32" y="124" width="136" height="6" rx="3" fill="#D00000"/>
+  <text x="100" y="162" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="24" fill="#D00000" letter-spacing="3">FUDOMA</text>
 </svg></div>
           <div class="pricing-name silver-text">SILVER CLUB</div>
         </div>
@@ -1120,13 +1117,13 @@ textarea.form-control { height: 120px; resize: vertical; }
       <!-- GOLD -->
       <div class="pricing-card">
         <div class="pricing-header-gold">
-          <div class="pricing-logo pricing-logo-gold"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="46" fill="none" stroke="white" stroke-width="6"/>
-  <circle cx="50" cy="28" r="5" fill="none" stroke="white" stroke-width="4"/>
-  <line x1="50" y1="33" x2="50" y2="38" stroke="white" stroke-width="4"/>
-  <path d="M20 62 Q20 38 50 38 Q80 38 80 62 Z" fill="white"/>
-  <rect x="16" y="63" width="68" height="5" rx="2" fill="white"/>
-  <rect x="20" y="70" width="60" height="5" rx="2" fill="white"/>
+          <div class="pricing-logo pricing-logo-gold"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="92" fill="white" stroke="#D00000" stroke-width="9"/>
+  <circle cx="100" cy="44" r="8" fill="none" stroke="#D00000" stroke-width="6"/>
+  <path d="M100 52 C65 52 35 72 30 105 L170 105 C165 72 135 52 100 52 Z" fill="#D00000"/>
+  <rect x="26" y="110" width="148" height="9" rx="4" fill="#D00000"/>
+  <rect x="32" y="124" width="136" height="6" rx="3" fill="#D00000"/>
+  <text x="100" y="162" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="24" fill="#D00000" letter-spacing="3">FUDOMA</text>
 </svg></div>
           <div class="pricing-name gold-text">GOLD CLUB</div>
         </div>
@@ -1144,13 +1141,13 @@ textarea.form-control { height: 120px; resize: vertical; }
       <!-- PLATINUM -->
       <div class="pricing-card">
         <div class="pricing-header-platinum">
-          <div class="pricing-logo pricing-logo-platinum"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="46" fill="none" stroke="white" stroke-width="6"/>
-  <circle cx="50" cy="28" r="5" fill="none" stroke="white" stroke-width="4"/>
-  <line x1="50" y1="33" x2="50" y2="38" stroke="white" stroke-width="4"/>
-  <path d="M20 62 Q20 38 50 38 Q80 38 80 62 Z" fill="white"/>
-  <rect x="16" y="63" width="68" height="5" rx="2" fill="white"/>
-  <rect x="20" y="70" width="60" height="5" rx="2" fill="white"/>
+          <div class="pricing-logo pricing-logo-platinum"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="92" fill="white" stroke="#D00000" stroke-width="9"/>
+  <circle cx="100" cy="44" r="8" fill="none" stroke="#D00000" stroke-width="6"/>
+  <path d="M100 52 C65 52 35 72 30 105 L170 105 C165 72 135 52 100 52 Z" fill="#D00000"/>
+  <rect x="26" y="110" width="148" height="9" rx="4" fill="#D00000"/>
+  <rect x="32" y="124" width="136" height="6" rx="3" fill="#D00000"/>
+  <text x="100" y="162" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="24" fill="#D00000" letter-spacing="3">FUDOMA</text>
 </svg></div>
           <div class="pricing-name platinum-text">PLATINUM CLUB</div>
         </div>
